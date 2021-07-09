@@ -12,6 +12,11 @@ do
 	i=0
 	while [[ $i -lt $NUMBER_COMPUTERS ]]
 	do
+		if [ $j = 0 ];then
+			HOST="l${i}"
+		elif [ $j = 1 ];then
+			HOST="l${i}_"
+		fi
 		IP=${SERVER_IPS[j]}
 		cat <<- EOF >> ${USERNAME}.config
 		Host $HOST
@@ -30,18 +35,10 @@ for j in {0..1}
 do
 
 	IP=${SERVER_IPS[j]}
-
 	i=0
 	while [[ $i -lt $NUMBER_COMPUTERS ]]
 	# for i in {0..5}
 	do
-
-		if [ $j = 0 ];then
-			HOST="l${i}"
-		elif [ $j = 1 ];then
-			HOST="l${i}_"
-		fi
-
 		frp_dir=frp_m${i}
 		frp_system=${frp_dir}/systemd/
 		[[ -d $frp_dir ]] && rm -rf $frp_dir
