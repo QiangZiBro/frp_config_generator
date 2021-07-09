@@ -3,8 +3,7 @@ set -ex
 
 HOSTNAME=`hostname`
 USER=`whoami`
-# TODO: this should use relative path
-frp_dir="/home/${USER}/frp_m${HOSTNAME: -1}"
+frp_dir="$(dirname $0)"/..
 
 if [ -d "/usr/local/frp_m${HOSTNAME: -1}" ];then
 	sudo rm -rf "/usr/local/frp_m${HOSTNAME: -1}"
