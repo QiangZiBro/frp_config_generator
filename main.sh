@@ -1,8 +1,8 @@
-USERNAME=qiangzibro
+USERNAME=${1:-"qiangzibro"}
 SERVER_IPS=("10.22.148.86" "10.22.78.13")
 
 if [ -f "config" ]; then
-	rm config
+	rm ${USERNAME}.config
 fi
 
 for j in {0..1}
@@ -27,7 +27,7 @@ do
 		cp setup.sh ${frp_dir}
 
 
-		cat <<- EOF >> config
+		cat <<- EOF >> ${USERNAME}.config
 		Host $HOST
 		HostName $IP
 		Port 610${i}
