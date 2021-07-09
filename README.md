@@ -22,3 +22,6 @@ mv qiangzibro.config ~/.ssh
 ```
 
 Enjoy! :beer::beer:
+
+# TODO
+- [ ] Include the `frps.ini` file for server
