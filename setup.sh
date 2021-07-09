@@ -3,7 +3,7 @@ set -ex
 
 HOSTNAME=`hostname`
 USER=`whoami`
-frp_dir="$(dirname $0)"/..
+frp_dir="$(dirname $0)/../frp_m${HOSTNAME: -1}"
 
 if [ -d "/usr/local/frp_m${HOSTNAME: -1}" ];then
 	sudo rm -rf "/usr/local/frp_m${HOSTNAME: -1}"
