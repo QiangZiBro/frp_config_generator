@@ -2,7 +2,7 @@ USERNAME=${1:-"qiangzibro"}
 NUMBER_COMPUTERS=${2:-5}
 SERVER_IPS=("10.22.148.86" "10.22.78.13")
 
-if [ -f "config" ]; then
+if [ -f "${USERNAME}.config" ]; then
 	rm ${USERNAME}.config
 fi
 
