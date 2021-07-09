@@ -1,16 +1,39 @@
 USERNAME=${1:-"qiangzibro"}
+NUMBER_COMPUTERS=${2:-5}
 SERVER_IPS=("10.22.148.86" "10.22.78.13")
 
 if [ -f "config" ]; then
 	rm ${USERNAME}.config
 fi
 
+# generate config file
+for j in {0..1}
+do
+	i=0
+	while [[ $i -lt $NUMBER_COMPUTERS ]]
+	do
+		IP=${SERVER_IPS[j]}
+		cat <<- EOF >> ${USERNAME}.config
+		Host $HOST
+		HostName $IP
+		Port 610${i}
+		User $USERNAME
+
+		EOF
+		i=$(expr $i + 1)
+	done
+done 
+
+
+# generate frp software
 for j in {0..1}
 do
 
 	IP=${SERVER_IPS[j]}
 
-	for i in {0..5}
+	i=0
+	while [[ $i -lt $NUMBER_COMPUTERS ]]
+	# for i in {0..5}
 	do
 
 		if [ $j = 0 ];then
@@ -26,14 +49,6 @@ do
 
 		cp setup.sh ${frp_dir}
 
-
-		cat <<- EOF >> ${USERNAME}.config
-		Host $HOST
-		HostName $IP
-		Port 610${i}
-		User $USERNAME
-
-		EOF
 
 		cat <<- EOF > ${frp_dir}/frpc${j}.ini
 		[common]
@@ -78,5 +93,6 @@ do
 		WantedBy=multi-user.target
 		EOF
 
+	i=$(expr $i + 1)
 	done
 done
