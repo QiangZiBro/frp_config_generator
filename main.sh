@@ -21,7 +21,8 @@ do
 
 		frp_dir=frp_m${i}
 		frp_system=${frp_dir}/systemd/
-		mkdir -p $frp_dir $frp_system
+		[[ -d $frp_dir ]] && rm -rf $frp_dir
+		cp -r frp $frp_dir
 
 		cp setup.sh ${frp_dir}
 
