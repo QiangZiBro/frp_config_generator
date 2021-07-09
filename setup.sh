@@ -3,6 +3,7 @@ set -ex
 
 HOSTNAME=`hostname`
 USER=`whoami`
+# TODO: this should use relative path
 frp_dir="/home/${USER}/frp_m${HOSTNAME: -1}"
 
 if [ -d "/usr/local/frp_m${HOSTNAME: -1}" ];then
