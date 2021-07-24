@@ -14,7 +14,7 @@ cd /usr/local
 sudo rm -rf frp
 sudo ln -s "frp_m"${HOSTNAME: -1}  frp
 
-for i in {0..1}
+for i in `seq 1 2`
 do
 	sudo cp /usr/local/frp/systemd/frpc${i}.service /lib/systemd/system/
 	sudo systemctl enable frpc${i}.service

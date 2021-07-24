@@ -1,13 +1,17 @@
 USERNAME=${1:-"qiangzibro"}
 NUMBER_COMPUTERS=${2:-5}
 SERVER_IPS=("10.22.148.86" "10.22.78.13")
+N_SERVERS=${#SERVER_IPS[@]}
 
-if [ -f "${USERNAME}.config" ]; then
-	rm ${USERNAME}.config
+make clean
+if test "$(uname)" = "Darwin";then
+	gsed "s|seq.*$|seq 1 $N_SERVERS"'`|g' setup.sh
+elif test "$(expr substr $(uname -s) 1 5)" = "Linux";then
+	ssed "s|seq.*$|seq 1 $N_SERVERS"'`|g' setup.sh
 fi
 
 # generate config file
-for j in {0..1}
+for j in `seq 1 $N_SERVERS`
 do
 	i=0
 	while [[ $i -lt $NUMBER_COMPUTERS ]]
@@ -31,7 +35,7 @@ done
 
 
 # generate frp software
-for j in {0..1}
+for j in `seq 1 $N_SERVERS`
 do
 
 	IP=${SERVER_IPS[j]}
